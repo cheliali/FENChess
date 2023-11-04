@@ -1,0 +1,33 @@
+.input {
+  display: flex;
+  max-height: 110px;
+  max-width: 100%;
+  flex-direction: column;
+  padding: 0 10px;
+  border-radius: 10px;
+
+  &__label {
+    font-size: 18px;
+    margin: 10px 0;
+    font-weight: 500;
+  }
+
+  &__field {
+    padding: 10px;
+    text-align: left;
+    border-width: 0px;
+    border-radius: 5px;
+
+    &--error {
+      border-width: 2px;
+      border-color: var(--primary);
+    }
+  }
+
+  &__message-error {
+    margin-top: 5px;
+    color: var(--error);
+    font-size: small;
+    font-weight: 100;
+  }
+}

@@ -1,0 +1,32 @@
+.chess-board {
+  width: 400px;
+  height: 400px;
+  display: grid;
+  grid-template-columns: repeat(9, 50px);
+  grid-template-rows: repeat(9, 50px);
+
+  &__square {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:nth-child(odd) {
+      background-color: white;
+      color: black;
+    }
+
+    &--fenText {
+      width: 100px;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+    }
+
+    &--hidden {
+      opacity: 0;
+    }
+  }
+}
