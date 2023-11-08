@@ -1,8 +1,7 @@
 .chess-board {
-  width: 400px;
   height: 400px;
   display: grid;
-  grid-template-columns: repeat(9, 50px);
+  grid-template-columns: repeat(8, 50px) 100px;
   grid-template-rows: repeat(9, 50px);
 
   &__square {

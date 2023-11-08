@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import { FENChess } from "./FENChess";
-import "./index.css";
+import { store } from "./store/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <FENChess />
+    <Provider store={store}>
+      <FENChess />
+    </Provider>
   </React.StrictMode>
 );

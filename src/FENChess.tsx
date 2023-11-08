@@ -1,32 +1,19 @@
-import { Fragment, useState } from "react";
 import { ChessBoard } from "./components/molecules/chess-board/chess-board";
-import { Input } from "./components/atoms/input/input";
+import { FenForm } from "./components/molecules/fen-form/fen-form";
+import { useAppSelector } from "./store/hooks/store-hooks";
+import "./FENChess.scss";
 
 export const FENChess = () => {
-  const resetedFenInput = Array.from({ length: 8 }, () => "");
-  const startGameFen = [
-    "RNBKQBNR",
-    "PPPPPPPP",
-    "8",
-    "8",
-    "8",
-    "8",
-    "pppppppp",
-    "rnbqkbnr",
-  ];
-
-  const [fenInput, setFenInput] = useState(resetedFenInput);
-
-  const startGame = () => {
-    setFenInput(startGameFen);
-  };
+  const { fenInput } = useAppSelector((state) => state.fen);
 
   return (
-    <Fragment>
-      <ChessBoard fenInput={fenInput} />
-      <Input label="Row#" />
-      <Input label="Input" />
-      <button onClick={startGame}>Start</button>
-    </Fragment>
+    <div className="fen-chess">
+      <h1>FEN Chess</h1>
+      <p>Instructions</p>
+      <div className="fen-chess__play-area">
+        <FenForm />
+        <ChessBoard fenInput={fenInput} />
+      </div>
+    </div>
   );
 };
