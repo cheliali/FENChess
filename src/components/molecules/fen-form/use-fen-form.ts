@@ -4,8 +4,9 @@ import {
   startGame as startChessGame,
   resetGame as resetChessGame,
   updateFen,
+  toggleSelection,
 } from "../../../store/fen/fen-slice";
-import { formatFenString } from "../../../utils/fen-formatter";
+import { getFenArray } from "../../../utils/fen-formatter";
 
 type Inputs = {
   rowNumber: number;
@@ -29,7 +30,7 @@ export const useFenForm = () => {
   }));
 
   const onSubmit: SubmitHandler<Inputs> = (form) => {
-    if (formatFenString(form.fenInput).length !== 8) {
+    if (getFenArray(form.fenInput).length !== 8) {
       setError("fenInput", { message: "Invalid FEN" });
       return;
     }

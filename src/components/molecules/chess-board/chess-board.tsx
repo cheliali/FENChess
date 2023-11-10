@@ -1,36 +1,57 @@
 import { Fragment, FC } from "react";
 import { useChessBoard } from "./use-chess-board";
+import { Piece, whitePieces } from "../../../store/fen/fen-slice";
 import "./chess-board.scss";
-
 interface ChessBoardProps {
-  fenInput: string[];
+  fenInputs: string[];
 }
 
-export const ChessBoard: FC<ChessBoardProps> = ({ fenInput }) => {
-  const { chessBoardRows, chessBoardColumns, formatFen, getModifier } =
-    useChessBoard(fenInput);
+export const ChessBoard: FC<ChessBoardProps> = ({ fenInputs }) => {
+  const {
+    chessBoardRows,
+    chessBoardColumns,
+    selectedPiece,
+    showPieces,
+    formatFen,
+    getModifier,
+    selectPiece,
+  } = useChessBoard(fenInputs);
+
+  const replaceImg = (piece: Piece | undefined) => {
+    // currentFenArray[currentCol]
+  };
 
   return (
     <div className="chess-board">
-      {chessBoardRows.map((row, rowI) => {
-        let fenArray: string[] = [];
-        if (rowI < 8) {
-          fenArray = formatFen(rowI);
+      {chessBoardRows.map((_, currentRow) => {
+        let currentFenArray: (Piece | undefined)[] = [];
+        if (currentRow < 8) {
+          currentFenArray = formatFen(currentRow);
         }
         return (
-          <Fragment key={row}>
-            {chessBoardColumns.map((col, colI) => (
+          <Fragment key={currentRow}>
+            {chessBoardColumns.map((_, currentCol) => (
               <div
-                //TODO ONCLICK
-                className={`chess-board__square${getModifier(rowI, colI)}`}
-                key={`${row}-${col}`}
+                onClick={() => {
+                  selectPiece(currentRow, currentCol, currentFenArray);
+                }}
+                className={`chess-board__square${getModifier(
+                  currentRow,
+                  currentCol
+                )}`}
+                key={`${currentRow}-${currentCol}`}
               >
-                {colI < 8 ? fenArray[colI] : fenInput[rowI]}
+                {currentCol < 8 ? (
+                  <img src={whitePieces["B"]} />
+                ) : (
+                  fenInputs[currentRow]
+                )}
               </div>
             ))}
           </Fragment>
         );
       })}
+      <div>{selectedPiece && showPieces(selectedPiece)}</div>
     </div>
   );
 };

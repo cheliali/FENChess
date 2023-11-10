@@ -31,7 +31,7 @@ export const FenForm = () => {
               value={value}
               errorMessage={error?.message}
               onChange={({ target: { value } }) => {
-                if (!/^[pbkqnr0-9]*$/.test(value)) return;
+                if (!/^[pbkqnrPBKQNR0-9]*$/.test(value)) return;
                 return onChange(value);
               }}
             />
@@ -45,7 +45,7 @@ export const FenForm = () => {
         Start Game
       </button>
       <button type="button" onClick={resetGame} className="fen-form__button">
-        Reset Game
+        Reset
       </button>
     </form>
   );

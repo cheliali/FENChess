@@ -4,7 +4,7 @@ import { useAppSelector } from "./store/hooks/store-hooks";
 import "./FENChess.scss";
 
 export const FENChess = () => {
-  const { fenInput } = useAppSelector((state) => state.fen);
+  const { fenInputs } = useAppSelector((state) => state.fen);
 
   return (
     <div className="fen-chess">
@@ -12,7 +12,7 @@ export const FENChess = () => {
       <p>Instructions</p>
       <div className="fen-chess__play-area">
         <FenForm />
-        <ChessBoard fenInput={fenInput} />
+        <ChessBoard fenInputs={fenInputs} />
       </div>
     </div>
   );
