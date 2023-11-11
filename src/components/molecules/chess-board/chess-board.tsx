@@ -1,6 +1,6 @@
 import { Fragment, FC } from "react";
 import { useChessBoard } from "./use-chess-board";
-import { Piece, whitePieces } from "../../../store/fen/fen-slice";
+import { Piece } from "../../../store/fen/fen-slice";
 import "./chess-board.scss";
 interface ChessBoardProps {
   fenInputs: string[];
@@ -11,15 +11,12 @@ export const ChessBoard: FC<ChessBoardProps> = ({ fenInputs }) => {
     chessBoardRows,
     chessBoardColumns,
     selectedPiece,
+    replaceText,
     showPieces,
     formatFen,
     getModifier,
     selectPiece,
   } = useChessBoard(fenInputs);
-
-  const replaceImg = (piece: Piece | undefined) => {
-    // currentFenArray[currentCol]
-  };
 
   return (
     <div className="chess-board">
@@ -41,11 +38,9 @@ export const ChessBoard: FC<ChessBoardProps> = ({ fenInputs }) => {
                 )}`}
                 key={`${currentRow}-${currentCol}`}
               >
-                {currentCol < 8 ? (
-                  <img src={whitePieces["B"]} />
-                ) : (
-                  fenInputs[currentRow]
-                )}
+                {currentCol < 8
+                  ? replaceText(currentFenArray[currentCol])
+                  : fenInputs[currentRow]}
               </div>
             ))}
           </Fragment>

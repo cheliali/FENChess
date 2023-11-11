@@ -54,21 +54,30 @@ export const fenSlice = createSlice({
   reducers: {
     resetGame: (state) => {
       state.fenInputs = Array.from({ length: 8 }, () => "");
+      localStorage.setItem("fen Inputs", JSON.stringify(state.fenInputs));
     },
-    startGame: (state) => {
-      state.fenInputs = [
-        "RNBKQBNR",
-        "PPPPPPPP",
-        "8",
-        "8",
-        "8",
-        "8",
-        "pppppppp",
-        "rnbkqbnr",
-      ];
+    startGame: (
+      state,
+      { payload: fenInputs }: PayloadAction<string[] | undefined>
+    ) => {
+      if (fenInputs) state.fenInputs = fenInputs;
+      else {
+        state.fenInputs = [
+          "RNBKQBNR",
+          "PPPPPPPP",
+          "8",
+          "8",
+          "8",
+          "8",
+          "pppppppp",
+          "rnbkqbnr",
+        ];
+      }
+      localStorage.setItem("fen Inputs", JSON.stringify(state.fenInputs));
     },
     updateFen: (state, { payload: form }: PayloadAction<Inputs>) => {
       state.fenInputs[form.rowNumber - 1] = form.fenInput;
+      localStorage.setItem("fen Inputs", JSON.stringify(state.fenInputs));
     },
     setSelectedSpot: (
       state,

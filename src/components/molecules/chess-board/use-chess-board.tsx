@@ -21,8 +21,15 @@ export const useChessBoard = (fenInputs: string[]) => {
   );
 
   const whitePiecesArray = Object.keys(whitePieces);
-
   const blackPiecesArray = Object.keys(blackPieces);
+
+  const replaceText = (piece: Piece | undefined) => {
+    if (piece) {
+      return (
+        <img width="50px" src={{ ...whitePieces, ...blackPieces }[piece]} />
+      );
+    }
+  };
 
   const switchPiece = (newPiece: Piece) => {
     const { prevRow, prevCol } = getPrevPieceState();
@@ -157,6 +164,7 @@ export const useChessBoard = (fenInputs: string[]) => {
     chessBoardRows,
     chessBoardColumns,
     selectedPiece,
+    replaceText,
     showPieces,
     formatFen,
     getModifier,

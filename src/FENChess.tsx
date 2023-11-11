@@ -1,9 +1,17 @@
 import { ChessBoard } from "./components/molecules/chess-board/chess-board";
 import { FenForm } from "./components/molecules/fen-form/fen-form";
-import { useAppSelector } from "./store/hooks/store-hooks";
+import { useAppDispatch, useAppSelector } from "./store/hooks/store-hooks";
+import { useEffect } from "react";
+import { startGame } from "./store/fen/fen-slice";
 import "./FENChess.scss";
 
 export const FENChess = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const savedFenInput = localStorage.getItem("fen Inputs");
+    if (savedFenInput) dispatch(startGame(JSON.parse(savedFenInput)));
+  }, []);
+
   const { fenInputs } = useAppSelector((state) => state.fen);
 
   return (
