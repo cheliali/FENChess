@@ -9,10 +9,12 @@ describe("Selector", () => {
   ];
 
   it("should render combobox", () => {
-    render(<Selector options={options} />);
+    render(<Selector label="Row Number" options={options} />);
 
+    const label = screen.getByText("Row Number");
     const combobox = screen.getByRole("combobox");
 
+    expect(label).toBeInTheDocument();
     expect(combobox).toBeInTheDocument();
   });
 

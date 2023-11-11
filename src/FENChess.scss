@@ -11,6 +11,12 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   color: white;
 
+  &__instructions {
+    position: absolute;
+    left: 10px;
+    width: 20%;
+  }
+
   &__play-area {
     color-scheme: light dark;
     display: flex;

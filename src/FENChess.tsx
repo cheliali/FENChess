@@ -15,8 +15,33 @@ export const FENChess = () => {
   return (
     <div className="fen-chess">
       <h1>FEN Chess</h1>
-      <p>Instructions</p>
-      <p>Press Start Game to set all the pieces in an initial position</p>
+      <div className="fen-chess__instructions">
+        <h3>Instructions</h3>
+        <ul>
+          <li>
+            Press Start Game to set all the pieces in a conventional initial
+            chess position if desired.
+          </li>
+          <li>Press Reset to clear chessboard.</li>
+          <li>
+            FEN Input only accepts the following characters :{" "}
+            <ul>
+              <li>p: pawn</li>
+              <li>n: knight</li>
+              <li>r: rook</li>
+              <li>b: bishop</li>
+              <li>q: queen</li>
+              <li>k: king</li>
+              <li>numbers from 1 to 8</li>
+            </ul>
+          </li>
+          <li>
+            Use lowercase characters for black pieces and uppercase for white
+            pieces
+          </li>
+          <li>A valid FEN Input represents exactly 8 squares per row</li>
+        </ul>
+      </div>
       <div className="fen-chess__play-area">
         <FenForm />
         <ChessBoard />
