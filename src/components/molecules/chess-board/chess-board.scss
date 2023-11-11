@@ -29,7 +29,11 @@
     }
 
     &--clicked {
-      border: 1px solid yellow;
+      opacity: 0.5;
     }
+  }
+
+  &__pieces-options {
+    display: flex;
   }
 }

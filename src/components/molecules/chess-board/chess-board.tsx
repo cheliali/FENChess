@@ -1,7 +1,7 @@
 import { Fragment, FC } from "react";
-import { useChessBoard } from "./use-chess-board";
 import { Piece } from "../../../store/fen/fen-slice";
 import "./chess-board.scss";
+import { useChessBoard } from "./hooks/use-chess-board";
 interface ChessBoardProps {
   fenInputs: string[];
 }
@@ -11,11 +11,11 @@ export const ChessBoard: FC<ChessBoardProps> = ({ fenInputs }) => {
     chessBoardRows,
     chessBoardColumns,
     selectedPiece,
-    replaceText,
+    renderPieceImg,
     showPieces,
     formatFen,
-    getModifier,
-    selectPiece,
+    getClass,
+    handlePieceActions,
   } = useChessBoard(fenInputs);
 
   return (
@@ -30,23 +30,22 @@ export const ChessBoard: FC<ChessBoardProps> = ({ fenInputs }) => {
             {chessBoardColumns.map((_, currentCol) => (
               <div
                 onClick={() => {
-                  selectPiece(currentRow, currentCol, currentFenArray);
+                  handlePieceActions(currentRow, currentCol, currentFenArray);
                 }}
-                className={`chess-board__square${getModifier(
-                  currentRow,
-                  currentCol
-                )}`}
+                className={getClass(currentRow, currentCol)}
                 key={`${currentRow}-${currentCol}`}
               >
                 {currentCol < 8
-                  ? replaceText(currentFenArray[currentCol])
+                  ? renderPieceImg(currentFenArray[currentCol])
                   : fenInputs[currentRow]}
               </div>
             ))}
           </Fragment>
         );
       })}
-      <div>{selectedPiece && showPieces(selectedPiece)}</div>
+      <div className="chess-board__pieces-options">
+        {selectedPiece && showPieces(selectedPiece)}
+      </div>
     </div>
   );
 };
