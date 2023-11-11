@@ -20,13 +20,13 @@
 
     &--error {
       border-width: 2px;
-      border-color: var(--primary);
+      border-color: red;
     }
   }
 
   &__message-error {
     margin-top: 5px;
-    color: var(--error);
+    color: red;
     font-size: small;
     font-weight: 100;
   }

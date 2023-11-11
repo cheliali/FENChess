@@ -38,13 +38,23 @@ export const FenForm = () => {
           );
         }}
       />
-      <button type="submit" className="fen-form__button">
+      <button type="submit" aria-label="enter" className="fen-form__button">
         Enter FEN
       </button>
-      <button type="button" onClick={startGame} className="fen-form__button">
+      <button
+        type="button"
+        aria-label="start"
+        onClick={startGame}
+        className="fen-form__button"
+      >
         Start Game
       </button>
-      <button type="button" onClick={resetGame} className="fen-form__button">
+      <button
+        type="button"
+        aria-label="reset"
+        onClick={resetGame}
+        className="fen-form__button"
+      >
         Reset
       </button>
     </form>

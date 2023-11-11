@@ -1,22 +1,20 @@
-import { Fragment, FC } from "react";
+import { Fragment } from "react";
 import { Piece } from "../../../store/fen/fen-slice";
-import "./chess-board.scss";
 import { useChessBoard } from "./hooks/use-chess-board";
-interface ChessBoardProps {
-  fenInputs: string[];
-}
+import "./chess-board.scss";
 
-export const ChessBoard: FC<ChessBoardProps> = ({ fenInputs }) => {
+export const ChessBoard = () => {
   const {
     chessBoardRows,
     chessBoardColumns,
     selectedPiece,
+    fenInputs,
     renderPieceImg,
     showPieces,
     formatFen,
     getClass,
     handlePieceActions,
-  } = useChessBoard(fenInputs);
+  } = useChessBoard();
 
   return (
     <div className="chess-board">
@@ -29,6 +27,7 @@ export const ChessBoard: FC<ChessBoardProps> = ({ fenInputs }) => {
           <Fragment key={currentRow}>
             {chessBoardColumns.map((_, currentCol) => (
               <div
+                data-testid={`chess-block-${currentRow}-${currentCol}`}
                 onClick={() => {
                   handlePieceActions(currentRow, currentCol, currentFenArray);
                 }}

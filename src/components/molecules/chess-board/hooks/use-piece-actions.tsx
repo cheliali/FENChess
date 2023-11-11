@@ -30,11 +30,6 @@ export const usePieceActions = ({
   const dispatch = useAppDispatch();
   const { selectedPiece } = useAppSelector((state) => state.fen);
 
-  const unselectPiece = () => {
-    dispatch(setSelectedPiece(undefined));
-    dispatch(setSelectedSpot(undefined));
-  };
-
   const selectPiece = (
     currentRow: number,
     currentCol: number,
@@ -45,6 +40,11 @@ export const usePieceActions = ({
     dispatch(setSelectedSpot(`${currentRow}-${currentCol}`));
   };
 
+  const unselectPiece = () => {
+    dispatch(setSelectedPiece(undefined));
+    dispatch(setSelectedSpot(undefined));
+  };
+
   const showPieces = (piece: Piece | undefined) => {
     const currentPieceColor = getPieceColor(piece);
 
@@ -53,6 +53,7 @@ export const usePieceActions = ({
     return Object.keys(pieces).map((newPiece) => {
       return (
         <img
+          aria-label={`switch-options-${newPiece}`}
           width="50px"
           src={pieces[newPiece as keyof typeof pieces]}
           onClick={() => switchPiece(newPiece as Piece)}
@@ -93,7 +94,7 @@ export const usePieceActions = ({
     const updatedCurrentFen = getFenString(currentArray);
     const updatedPrevFen = getFenString(prevArray);
 
-    if (currentCol !== 8) {
+    if (currentCol < 8) {
       dispatch(updateFen({ rowNumber: prevRow + 1, fenInput: updatedPrevFen }));
       dispatch(
         updateFen({ rowNumber: currentRow + 1, fenInput: updatedCurrentFen })

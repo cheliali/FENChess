@@ -7,8 +7,10 @@ import { useAppSelector } from "../../../../store/hooks/store-hooks";
 import { getFenArray } from "../../../../utils/fen-formatter";
 import { usePieceActions } from "./use-piece-actions";
 
-export const useChessBoard = (fenInputs: string[]) => {
-  const { selectedSpot, selectedPiece } = useAppSelector((state) => state.fen);
+export const useChessBoard = () => {
+  const { selectedSpot, selectedPiece, fenInputs } = useAppSelector(
+    (state) => state.fen
+  );
   const chessBoardRows = Array.from({ length: 9 }, (_, i) => i + 1);
   const chessBoardColumns = Array.from({ length: 9 }, (_, i) =>
     String.fromCharCode(97 + i)
@@ -78,6 +80,7 @@ export const useChessBoard = (fenInputs: string[]) => {
     chessBoardRows,
     chessBoardColumns,
     selectedPiece,
+    fenInputs,
     renderPieceImg,
     showPieces,
     formatFen,
