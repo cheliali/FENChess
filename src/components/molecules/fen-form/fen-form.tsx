@@ -8,6 +8,7 @@ export const FenForm = () => {
   const {
     control,
     chessBoardRows,
+    chessThemes,
     register,
     handleSubmit,
     onSubmit,
@@ -18,6 +19,7 @@ export const FenForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="fen-form__form">
       <Selector
+        aria-label="row-number"
         options={chessBoardRows}
         label="Row Number"
         {...register("rowNumber")}
@@ -41,6 +43,12 @@ export const FenForm = () => {
             />
           );
         }}
+      />
+      <Selector
+        aria-label="theme"
+        options={chessThemes}
+        label="Theme"
+        {...register("theme")}
       />
       <button type="submit" aria-label="enter" className="fen-form__button">
         Enter FEN

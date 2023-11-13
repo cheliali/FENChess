@@ -7,11 +7,10 @@ import {
   setSelectedPiece,
   setSelectedSpot,
   updateFen,
-  whitePieces,
-  blackPieces,
 } from "../../../../store/fen/fen-slice";
 
 import { getFenArray, getFenString } from "../../../../utils/fen-formatter";
+import { blackPieces, whitePieces } from "../../../../utils/pieces-images";
 
 interface UsePieceActionsProps {
   fenInputs: string[];
@@ -28,7 +27,7 @@ export const usePieceActions = ({
   getPieceCoordinates,
 }: UsePieceActionsProps) => {
   const dispatch = useAppDispatch();
-  const { selectedPiece } = useAppSelector((state) => state.fen);
+  const { selectedPiece, chessTheme } = useAppSelector((state) => state.fen);
 
   const selectPiece = (
     currentRow: number,
@@ -54,8 +53,8 @@ export const usePieceActions = ({
       return (
         <img
           aria-label={`switch-options-${newPiece}`}
-          width="50px"
-          src={pieces[newPiece as keyof typeof pieces]}
+          height="50px"
+          src={pieces[newPiece as keyof typeof pieces][chessTheme]}
           onClick={() => switchPiece(newPiece as Piece)}
           key={newPiece}
         />

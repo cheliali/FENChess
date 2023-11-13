@@ -40,6 +40,7 @@ export const FENChess = () => {
             pieces
           </li>
           <li>A valid FEN Input represents exactly 8 squares per row</li>
+          <li>You can change the chess theme with the theme selector</li>
         </ul>
       </div>
       <div className="fen-chess__play-area">

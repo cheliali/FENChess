@@ -1,22 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import K from "../../assets/images/K.png";
-import Q from "../../assets/images/Q.png";
-import B from "../../assets/images/B.png";
-import R from "../../assets/images/R.png";
-import N from "../../assets/images/N.png";
-import P from "../../assets/images/P.png";
-import k from "../../assets/images/ki.png";
-import q from "../../assets/images/qi.png";
-import b from "../../assets/images/bi.png";
-import r from "../../assets/images/ri.png";
-import n from "../../assets/images/ni.png";
-import p from "../../assets/images/pi.png";
+import { blackPieces, whitePieces } from "../../utils/pieces-images";
 
 type Inputs = {
   rowNumber: number;
   fenInput: string;
 };
+
+export const themeOptions = ["classic", "empires", "medieval"] as const;
+export type Theme = (typeof themeOptions)[number];
 
 export type Piece = keyof typeof whitePieces | keyof typeof blackPieces;
 
@@ -24,28 +16,12 @@ export interface FenState {
   fenInputs: string[];
   selectedSpot?: string;
   selectedPiece?: Piece;
+  chessTheme: Theme;
 }
 
 const initialState: FenState = {
   fenInputs: Array.from({ length: 8 }, () => ""),
-};
-
-export const whitePieces = {
-  K,
-  Q,
-  B,
-  R,
-  N,
-  P,
-};
-
-export const blackPieces = {
-  k,
-  q,
-  b,
-  r,
-  n,
-  p,
+  chessTheme: "classic",
 };
 
 export const fenSlice = createSlice({
@@ -91,6 +67,9 @@ export const fenSlice = createSlice({
     ) => {
       state.selectedPiece = piece;
     },
+    setChessTheme: (state, { payload: theme }: PayloadAction<Theme>) => {
+      state.chessTheme = theme;
+    },
   },
 });
 export const {
@@ -99,4 +78,5 @@ export const {
   updateFen,
   setSelectedSpot,
   setSelectedPiece,
+  setChessTheme,
 } = fenSlice.actions;

@@ -3,6 +3,7 @@ import { render, screen } from "../../../utils/test-utils/test-utils";
 import userEvent, { UserEvent } from "@testing-library/user-event";
 import { store } from "../../../store/store";
 import { expect, vi } from "vitest";
+import { themeOptions } from "../../../store/fen/fen-slice";
 
 describe("Fen Form", () => {
   let user: UserEvent;
@@ -13,7 +14,7 @@ describe("Fen Form", () => {
   it("should render form", () => {
     render(<FenForm />);
 
-    const selector = screen.getByRole("combobox");
+    const selector = screen.getByRole("combobox", { name: "row-number" });
     const input = screen.getByRole("textbox");
     const enterFenBtn = screen.getByText(/Enter/i);
     const startBtn = screen.getByText(/Start/i);
@@ -103,5 +104,22 @@ describe("Fen Form", () => {
     expect(store.getState().fen.fenInputs).toEqual(
       Array.from({ length: 8 }, () => "")
     );
+  });
+  it("should change theme", async () => {
+    const spyDispatch = vi.spyOn(store, "dispatch");
+    render(<FenForm />);
+
+    const themeSelector = screen.getByRole("combobox", { name: "theme" });
+
+    const selectedTheme = screen.getByRole("option", {
+      name: themeOptions[1],
+    });
+
+    await user.selectOptions(themeSelector, selectedTheme);
+
+    expect(spyDispatch).toHaveBeenNthCalledWith(2, {
+      payload: themeOptions[1],
+      type: "fen/setChessTheme",
+    });
   });
 });

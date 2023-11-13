@@ -1,14 +1,11 @@
-import {
-  Piece,
-  whitePieces,
-  blackPieces,
-} from "../../../../store/fen/fen-slice";
+import { Piece } from "../../../../store/fen/fen-slice";
 import { useAppSelector } from "../../../../store/hooks/store-hooks";
 import { getFenArray } from "../../../../utils/fen-formatter";
+import { whitePieces, blackPieces } from "../../../../utils/pieces-images";
 import { usePieceActions } from "./use-piece-actions";
 
 export const useChessBoard = () => {
-  const { selectedSpot, selectedPiece, fenInputs } = useAppSelector(
+  const { selectedSpot, selectedPiece, fenInputs, chessTheme } = useAppSelector(
     (state) => state.fen
   );
   const chessBoardRows = Array.from({ length: 9 }, (_, i) => i + 1);
@@ -47,7 +44,10 @@ export const useChessBoard = () => {
   const renderPieceImg = (piece: Piece | undefined) => {
     if (piece) {
       return (
-        <img width="50px" src={{ ...whitePieces, ...blackPieces }[piece]} />
+        <img
+          height="50px"
+          src={{ ...whitePieces, ...blackPieces }[piece][chessTheme]}
+        />
       );
     }
   };
